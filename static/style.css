@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #121212;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 32px;
+}
+
+.header img {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #00c6ad;
+  margin: 0;
+  padding-left: 8px;
+}
+
+/* Chat container */
+.chat-container {
+  flex: 1;
+  padding: 20px 32px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Message wrapper */
+.message {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 8px 0;
+  padding: 4px 12px;
+}
+
+/* Bot message alignment */
+.message.bot {
+  flex-direction: row;
+  align-self: flex-start;
+}
+
+/* User message alignment */
+.message.user {
+  flex-direction: row-reverse;
+  align-self: flex-end;
+}
+
+/* Common text bubble styling */
+.message .text {
+  max-width: 75%;
+  padding: 16px 24px;
+  border-radius: 28px;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Bot text bubble */
+.message.bot .text {
+  background: linear-gradient(to right, #1f2b37, #263c44);
+  color: #a8f6ff;
+  border: 1px solid #00c6ad33;
+}
+
+/* User text bubble */
+.message.user .text {
+  background: linear-gradient(to right, #1e88e5, #3498db);
+  color: #ffffff;
+  border: 1px solid #3498db99;
+}
+
+/* Avatar style */
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 6px rgba(0, 198, 173, 0.2);
+}
+
+/* Input area */
+.input-wrapper {
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.input-wrapper input {
+  width: 60%;
+  padding: 14px 20px;
+  font-size: 1rem;
+  border-radius: 24px;
+  border: none;
+  background-color: #2a2a2a;
+  color: #fff;
+  box-shadow: 0 0 5px rgba(0, 198, 173, 0.4);
+}
+
+.input-wrapper input::placeholder {
+  color: #aaa;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+  background-color: #333;
+}

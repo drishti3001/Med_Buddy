@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your MediBot</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <div class="header">
+    <img src="{{ url_for('static', filename='images/medibot logo.png') }}" alt="medibot logo" />
+    <h1>Your MediBot</h1>
+  </div>
+
+  <div class="chat-container" id="chat-container">
+    <!-- Messages will be dynamically added here by JavaScript -->
+  </div>
+
+  <div class="input-wrapper">
+    <input type="text" id="user-input" placeholder="Enter any health related queries..." />
+  </div>
+
+  <!-- Define image URLs in JS before main logic -->
+  <script>
+    const botAvatarUrl = "{{ url_for('static', filename='images/medibot logo.png') }}";
+    const userAvatarUrl = "{{ url_for('static', filename='images/user.jpg') }}";
+  </script>
+
+  <!-- Main chat logic -->
+  <script>
+    const input = document.getElementById('user-input');
+    const chatContainer = document.getElementById('chat-container');
+
+    input.addEventListener('keydown', async (e) => {
+      if (e.key === 'Enter' && input.value.trim()) {
+        const question = input.value.trim();
+        input.value = "";
+
+        // Add user message to UI
+        chatContainer.innerHTML += `
+          <div class="message user">
+            <div class="text">${question}</div>
+            <img src="${userAvatarUrl}" class="avatar user-avatar" alt="User Avatar" />
+          </div>
+        `;
+
+        // Call backend
+        const response = await fetch('/ask', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ question })
+        });
+
+        const data = await response.json();
+
+        // Add bot response to UI
+        chatContainer.innerHTML += `
+          <div class="message bot">
+            <img src="${botAvatarUrl}" class="avatar bot-avatar" alt="Bot Avatar" />
+            <div class="text">${data.answer}</div>
+          </div>
+        `;
+
+        // Scroll to bottom
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+    });
+  </script>
+</body>
+</html>
